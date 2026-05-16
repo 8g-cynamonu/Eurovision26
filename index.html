@@ -494,8 +494,8 @@ function refreshButton() {
 document.getElementById('voter-name').addEventListener('input', refreshButton);
 
 // ── Voted state ───────────────────────────────────────────────────────────────
-function hasVoted()  { return localStorage.getItem(USER_KEY) === '1'; }
-function markVoted() { localStorage.setItem(USER_KEY, '1'); }
+function hasVoted()  { return false; }
+function markVoted() { }
 
 // ── Submit ────────────────────────────────────────────────────────────────────
 async function submitVote() {
@@ -518,13 +518,20 @@ async function submitVote() {
     return;
   }
 
-  localStorage.setItem(USER_KEY + '_picks', JSON.stringify(selections));
-  markVoted();
-  lockUI();
+
   const top = Object.entries(selections).sort((a,b) => b[1]-a[1])[0];
-  showToast(`🎉 Voted! ${top[1]} pts to ${top[0]}`);
+  showToast('🎉 Voted! ' + top[1] + ' pts to ' + top[0]);
   await loadAndRender();
-}
+
+  // Reset so the same person (or another) can vote again
+  selections = {};
+  openPicker = null;
+  refreshCards();
+  document.getElementById('voter-name').value = '';
+  refreshButton();
+  const btn2 = document.getElementById('vote-btn');
+  btn2.style.display = 'block';
+  btn2.textContent = 'Submit Votes ✨';
 
 function lockUI() {
   closePicker();
@@ -597,11 +604,7 @@ function showToast(msg) {
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 async function init() {
-  if (hasVoted()) {
-    try { selections = JSON.parse(localStorage.getItem(USER_KEY + '_picks') || '{}'); } catch {}
-    refreshCards();
-    lockUI();
-  }
+
   if (isConfigured()) {
     await loadAndRender();
     setInterval(loadAndRender, 15000);
