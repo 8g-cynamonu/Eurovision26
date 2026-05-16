@@ -393,25 +393,26 @@ let selections = {};
 let openPicker = null;
 
 // ── Build cards ───────────────────────────────────────────────────────────────
-const grid = document.getElementById('entries-grid');
-ENTRIES.forEach(e => {
-  const div = document.createElement('div');
-  div.className = 'card';
-  div.id = 'card-' + e.country;
-  div.innerHTML = `
-    <span class="card-num">${e.num}</span>
-    <span class="card-flag">${e.flag}</span>
-    <div class="card-info">
-      <div class="card-country">${e.country}</div>
-      <div class="card-song">"${e.song}"</div>
-      <div class="card-artist">${e.artist}</div>
-    </div>
-    <span class="card-pts-badge"></span>`;
-  div.onclick = ev => { ev.stopPropagation(); togglePicker(e.country); };
-  grid.appendChild(div);
-});
-
-document.addEventListener('click', () => closePicker());
+function buildCards() {
+  const grid = document.getElementById('entries-grid');
+  ENTRIES.forEach(e => {
+    const div = document.createElement('div');
+    div.className = 'card';
+    div.id = 'card-' + e.country;
+    div.innerHTML = `
+      <span class="card-num">${e.num}</span>
+      <span class="card-flag">${e.flag}</span>
+      <div class="card-info">
+        <div class="card-country">${e.country}</div>
+        <div class="card-song">"${e.song}"</div>
+        <div class="card-artist">${e.artist}</div>
+      </div>
+      <span class="card-pts-badge"></span>`;
+    div.onclick = ev => { ev.stopPropagation(); togglePicker(e.country); };
+    grid.appendChild(div);
+  });
+  document.addEventListener('click', () => closePicker());
+}
 
 // ── Picker ────────────────────────────────────────────────────────────────────
 function togglePicker(country) {
@@ -532,6 +533,7 @@ async function submitVote() {
   const btn2 = document.getElementById('vote-btn');
   btn2.style.display = 'block';
   btn2.textContent = 'Submit Votes ✨';
+}
 
 function lockUI() {
   closePicker();
@@ -604,6 +606,7 @@ function showToast(msg) {
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 async function init() {
+  buildCards();
 
   if (isConfigured()) {
     await loadAndRender();
