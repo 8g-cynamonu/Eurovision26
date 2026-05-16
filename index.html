@@ -7,192 +7,161 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --gold: #FFD700;
-    --teal: #00C9B1;
-    --pink: #FF4D8B;
-    --deep: #0D0D2B;
-    --card: #14143A;
-    --border: #2A2A5A;
-    --text: #E8E8FF;
-    --muted: #8888BB;
-    --p12: #FFD700;
-    --p10: #C0C0C0;
-    --p8:  #CD7F32;
+    --gold: #FFD700; --teal: #00C9B1; --pink: #FF4D8B;
+    --deep: #0D0D2B; --card: #14143A; --border: #2A2A5A;
+    --text: #E8E8FF; --muted: #8888BB;
+    --p12: #FFD700; --p10: #C0C0C0; --p8: #CD7F32;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   body {
-    background: var(--deep);
-    color: var(--text);
-    font-family: 'Nunito', sans-serif;
-    min-height: 100vh;
+    background: var(--deep); color: var(--text);
+    font-family: 'Nunito', sans-serif; min-height: 100vh;
     background-image:
       radial-gradient(ellipse 80% 40% at 50% 0%, rgba(0,201,177,0.12) 0%, transparent 70%),
       radial-gradient(ellipse 60% 30% at 80% 100%, rgba(255,77,139,0.1) 0%, transparent 70%);
   }
 
-  header { text-align: center; padding: 2.5rem 1rem 1.2rem; }
-
-  .stars {
-    font-size: 1.4rem; letter-spacing: 6px; color: var(--gold);
-    animation: twinkle 2s infinite alternate;
+  /* ── Setup banner ── */
+  #setup-banner {
+    background: #1a0a2e; border-bottom: 2px solid var(--pink);
+    padding: 1.2rem 1.5rem; font-size: 0.88rem; line-height: 1.7;
   }
-  @keyframes twinkle { from { opacity: 0.6; } to { opacity: 1; } }
+  #setup-banner h3 {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem;
+    color: var(--pink); letter-spacing: 2px; margin-bottom: 0.6rem;
+  }
+  #setup-banner ol { padding-left: 1.4rem; color: var(--text); }
+  #setup-banner li { margin-bottom: 0.3rem; }
+  #setup-banner code {
+    background: rgba(255,255,255,0.08); border-radius: 5px;
+    padding: 1px 6px; font-size: 0.82rem; color: var(--teal);
+    font-family: monospace; user-select: all;
+  }
+  #setup-banner .sql-block {
+    background: rgba(0,0,0,0.4); border: 1px solid var(--border);
+    border-radius: 10px; padding: 0.8rem 1rem; margin: 0.6rem 0;
+    font-family: monospace; font-size: 0.78rem; color: #aaffcc;
+    white-space: pre; overflow-x: auto; user-select: all;
+  }
+  .config-row {
+    display: flex; gap: 8px; margin-top: 0.8rem; flex-wrap: wrap;
+  }
+  .config-row input {
+    flex: 1; min-width: 200px; background: rgba(255,255,255,0.06);
+    border: 2px solid var(--border); border-radius: 8px;
+    padding: 8px 12px; color: var(--text); font-family: monospace;
+    font-size: 0.82rem; outline: none;
+  }
+  .config-row input:focus { border-color: var(--teal); }
+  .config-row input::placeholder { color: var(--muted); font-family: 'Nunito', sans-serif; }
+  .config-save-btn {
+    background: var(--teal); color: var(--deep); border: none;
+    border-radius: 8px; padding: 8px 18px; font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem; letter-spacing: 1px; cursor: pointer;
+  }
+  .config-save-btn:hover { opacity: 0.85; }
+  #setup-status { margin-top: 0.5rem; font-size: 0.82rem; font-weight: 700; min-height: 1.2em; }
+  #setup-status.ok  { color: var(--teal); }
+  #setup-status.err { color: var(--pink); }
+  .hide-banner-btn {
+    display: inline-block; margin-top: 0.6rem; font-size: 0.78rem;
+    color: var(--muted); cursor: pointer; text-decoration: underline; background: none; border: none;
+  }
 
+  header { text-align: center; padding: 2.5rem 1rem 1.2rem; }
+  .stars { font-size: 1.4rem; letter-spacing: 6px; color: var(--gold); animation: twinkle 2s infinite alternate; }
+  @keyframes twinkle { from { opacity: 0.6; } to { opacity: 1; } }
   h1 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(2.8rem, 8vw, 5rem);
+    font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.8rem, 8vw, 5rem);
     letter-spacing: 4px;
     background: linear-gradient(135deg, var(--gold) 0%, var(--teal) 50%, var(--pink) 100%);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     line-height: 1; margin: 0.3rem 0;
   }
-
-  .subtitle {
-    color: var(--muted); font-size: 0.95rem; font-weight: 600;
-    letter-spacing: 2px; text-transform: uppercase; margin-top: 0.4rem;
-  }
-
+  .subtitle { color: var(--muted); font-size: 0.95rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-top: 0.4rem; }
   .container { max-width: 700px; margin: 0 auto; padding: 0 1rem 3rem; }
 
-  /* Name */
   .name-section {
     background: var(--card); border: 1px solid var(--border);
     border-radius: 16px; padding: 1.2rem 1.5rem; margin-bottom: 1.2rem;
   }
-  .name-section label {
-    display: block; font-weight: 800; font-size: 0.85rem;
-    letter-spacing: 1px; text-transform: uppercase; color: var(--teal); margin-bottom: 0.5rem;
-  }
+  .name-section label { display: block; font-weight: 800; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; color: var(--teal); margin-bottom: 0.5rem; }
   .name-section input {
-    width: 100%; background: rgba(255,255,255,0.05);
-    border: 2px solid var(--border); border-radius: 10px;
-    padding: 10px 14px; color: var(--text);
-    font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 700; outline: none;
-    transition: border-color 0.2s;
+    width: 100%; background: rgba(255,255,255,0.05); border: 2px solid var(--border);
+    border-radius: 10px; padding: 10px 14px; color: var(--text);
+    font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 700; outline: none; transition: border-color 0.2s;
   }
   .name-section input:focus { border-color: var(--teal); }
   .name-section input::placeholder { color: var(--muted); font-weight: 400; }
   .name-section input:disabled { opacity: 0.5; }
 
-  /* Legend */
-  .points-legend {
-    display: flex; gap: 10px; justify-content: center;
-    margin-bottom: 0.9rem; flex-wrap: wrap;
-  }
-  .pts-badge {
-    display: flex; align-items: center; gap: 6px;
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 100px; padding: 6px 14px; font-size: 0.82rem; font-weight: 700;
-  }
+  .points-legend { display: flex; gap: 10px; justify-content: center; margin-bottom: 0.9rem; flex-wrap: wrap; }
+  .pts-badge { display: flex; align-items: center; gap: 6px; background: var(--card); border: 1px solid var(--border); border-radius: 100px; padding: 6px 14px; font-size: 0.82rem; font-weight: 700; }
   .pts-dot { width: 10px; height: 10px; border-radius: 50%; }
-  .pts-dot.p12 { background: var(--p12); }
-  .pts-dot.p10 { background: var(--p10); }
-  .pts-dot.p8  { background: var(--p8); }
-
-  .pts-left {
-    text-align: center; font-size: 0.82rem; color: var(--muted);
-    margin-bottom: 1rem; font-weight: 600; line-height: 1.4;
-  }
+  .pts-dot.p12 { background: var(--p12); } .pts-dot.p10 { background: var(--p10); } .pts-dot.p8 { background: var(--p8); }
+  .pts-left { text-align: center; font-size: 0.82rem; color: var(--muted); margin-bottom: 1rem; font-weight: 600; line-height: 1.4; }
   .pts-left strong { color: var(--gold); }
 
-  /* Results */
   #results-section {
     background: var(--card); border: 1px solid var(--border);
     border-radius: 16px; padding: 1.2rem 1.5rem; margin-bottom: 1.4rem; display: none;
   }
-  #results-section h2 {
-    font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem;
-    letter-spacing: 2px; color: var(--gold); margin-bottom: 0.2rem;
-  }
+  #results-section h2 { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 2px; color: var(--gold); margin-bottom: 0.2rem; }
   .results-meta { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.9rem; font-weight: 600; }
-
-  .result-row {
-    display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 0.88rem;
-  }
+  .result-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 0.88rem; }
   .result-flag { font-size: 1.15rem; width: 24px; text-align: center; }
   .result-name { width: 118px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.83rem; }
   .result-bar-wrap { flex: 1; background: rgba(255,255,255,0.06); border-radius: 100px; height: 13px; overflow: hidden; }
   .result-bar { height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--teal), var(--pink)); transition: width 0.6s ease; }
   .result-pts { font-size: 0.82rem; color: var(--gold); width: 44px; text-align: right; font-weight: 800; }
-
   .voter-list { margin-top: 1rem; border-top: 1px solid var(--border); padding-top: 0.9rem; }
-  .voter-list-title {
-    font-size: 0.75rem; color: var(--muted); font-weight: 700;
-    text-transform: uppercase; letter-spacing: 1px; margin-bottom: 7px;
-  }
-  .voter-entry {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 0.8rem; margin-bottom: 5px; flex-wrap: wrap;
-  }
+  .voter-list-title { font-size: 0.75rem; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 7px; }
+  .voter-entry { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; margin-bottom: 5px; flex-wrap: wrap; }
   .voter-name { font-weight: 800; color: var(--teal); min-width: 70px; }
-  .voter-pick {
-    display: inline-flex; align-items: center; gap: 3px;
-    background: rgba(255,255,255,0.05); border-radius: 100px; padding: 2px 8px; font-size: 0.76rem;
-  }
-  .voter-pts {
-    font-family: 'Bebas Neue', sans-serif; font-size: 0.88rem;
-    border-radius: 100px; padding: 1px 7px;
-  }
+  .voter-pick { display: inline-flex; align-items: center; gap: 3px; background: rgba(255,255,255,0.05); border-radius: 100px; padding: 2px 8px; font-size: 0.76rem; }
+  .voter-pts { font-family: 'Bebas Neue', sans-serif; font-size: 0.88rem; border-radius: 100px; padding: 1px 7px; }
   .voter-pts.p12 { background: rgba(255,215,0,0.15); color: var(--p12); }
   .voter-pts.p10 { background: rgba(192,192,192,0.15); color: var(--p10); }
-  .voter-pts.p8  { background: rgba(205,127,50,0.15);  color: var(--p8); }
+  .voter-pts.p8  { background: rgba(205,127,50,0.15); color: var(--p8); }
 
-  /* Cards */
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
   @media (max-width: 500px) { .grid { grid-template-columns: 1fr; } }
-
   .card {
-    background: var(--card); border: 2px solid var(--border);
-    border-radius: 14px; padding: 10px 12px; cursor: pointer;
-    transition: all 0.18s ease; display: flex; align-items: center;
-    gap: 10px; position: relative; overflow: hidden; user-select: none;
+    background: var(--card); border: 2px solid var(--border); border-radius: 14px;
+    padding: 10px 12px; cursor: pointer; transition: all 0.18s ease;
+    display: flex; align-items: center; gap: 10px;
+    position: relative; overflow: hidden; user-select: none;
   }
   .card:hover:not(.locked) { border-color: var(--teal); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,201,177,0.15); }
   .card.locked { cursor: default; }
 
-  /* Points picker popup */
   .pts-picker {
-    position: absolute;
-    top: 50%; right: 10px;
-    transform: translateY(-50%);
+    position: absolute; top: 50%; right: 10px; transform: translateY(-50%);
     display: flex; gap: 5px; align-items: center;
-    background: rgba(13,13,43,0.97);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    padding: 4px 6px;
-    z-index: 10;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    animation: popIn 0.15s ease;
+    background: rgba(13,13,43,0.97); border: 1px solid var(--border);
+    border-radius: 100px; padding: 4px 6px; z-index: 10;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5); animation: popIn 0.15s ease;
   }
   @keyframes popIn { from { opacity:0; transform: translateY(-50%) scale(0.85); } to { opacity:1; transform: translateY(-50%) scale(1); } }
   .pts-picker-btn {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 0.88rem;
-    border: none; border-radius: 100px;
-    padding: 3px 9px; cursor: pointer;
-    transition: transform 0.1s, opacity 0.1s;
-    font-weight: 700; line-height: 1.5;
+    font-family: 'Bebas Neue', sans-serif; font-size: 0.88rem;
+    border: none; border-radius: 100px; padding: 3px 9px; cursor: pointer;
+    transition: transform 0.1s; font-weight: 700; line-height: 1.5;
   }
   .pts-picker-btn:hover { transform: scale(1.12); }
   .pts-picker-btn.btn-12 { background: rgba(255,215,0,0.2); color: var(--p12); }
   .pts-picker-btn.btn-10 { background: rgba(192,192,192,0.2); color: var(--p10); }
-  .pts-picker-btn.btn-8  { background: rgba(205,127,50,0.2);  color: var(--p8); }
+  .pts-picker-btn.btn-8  { background: rgba(205,127,50,0.2); color: var(--p8); }
   .pts-picker-btn.btn-rm { background: rgba(255,77,139,0.15); color: var(--pink); font-size: 0.8rem; padding: 3px 7px; }
   .pts-picker-btn.active { outline: 2px solid currentColor; }
 
-  .card-pts-badge {
-    display: none; position: absolute; top: 7px; right: 9px;
-    font-family: 'Bebas Neue', sans-serif; font-size: 0.95rem;
-    border-radius: 100px; padding: 0 8px; line-height: 1.7;
-  }
+  .card-pts-badge { display: none; position: absolute; top: 7px; right: 9px; font-family: 'Bebas Neue', sans-serif; font-size: 0.95rem; border-radius: 100px; padding: 0 8px; line-height: 1.7; }
   .card.sel-12 { border-color: var(--p12); background: rgba(255,215,0,0.07); box-shadow: 0 0 0 1px var(--p12), 0 4px 20px rgba(255,215,0,0.12); }
   .card.sel-12 .card-pts-badge { display: block; background: rgba(255,215,0,0.18); color: var(--p12); }
   .card.sel-10 { border-color: var(--p10); background: rgba(192,192,192,0.06); box-shadow: 0 0 0 1px var(--p10), 0 4px 16px rgba(192,192,192,0.08); }
   .card.sel-10 .card-pts-badge { display: block; background: rgba(192,192,192,0.18); color: var(--p10); }
-  .card.sel-8  { border-color: var(--p8);  background: rgba(205,127,50,0.06);  box-shadow: 0 0 0 1px var(--p8),  0 4px 16px rgba(205,127,50,0.1); }
-  .card.sel-8  .card-pts-badge { display: block; background: rgba(205,127,50,0.18);  color: var(--p8); }
+  .card.sel-8  { border-color: var(--p8); background: rgba(205,127,50,0.06); box-shadow: 0 0 0 1px var(--p8), 0 4px 16px rgba(205,127,50,0.1); }
+  .card.sel-8  .card-pts-badge { display: block; background: rgba(205,127,50,0.18); color: var(--p8); }
 
   .card-num { font-size: 0.68rem; color: var(--muted); font-weight: 700; min-width: 16px; }
   .card-flag { font-size: 1.65rem; line-height: 1; }
@@ -201,7 +170,6 @@
   .card-song { color: var(--muted); font-size: 0.73rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .card-artist { color: var(--teal); font-size: 0.73rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-  /* Button */
   .vote-btn {
     display: block; width: 100%; max-width: 340px; margin: 1.4rem auto 0;
     padding: 15px; font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem;
@@ -213,27 +181,48 @@
   }
   .vote-btn:hover:not(:disabled) { transform: scale(1.03); box-shadow: 0 6px 28px rgba(0,201,177,0.45); }
   .vote-btn:disabled { opacity: 0.32; cursor: not-allowed; }
-
-  .already-voted-msg {
-    text-align: center; color: var(--gold); font-weight: 700;
-    margin-top: 1rem; display: none; font-size: 0.95rem;
-  }
-
+  .already-voted-msg { text-align: center; color: var(--gold); font-weight: 700; margin-top: 1rem; display: none; font-size: 0.95rem; }
   .error-msg { color: var(--pink); font-size: 0.82rem; font-weight: 700; text-align: center; margin-top: 0.7rem; min-height: 1.1em; }
 
   .toast {
-    position: fixed; bottom: 30px; left: 50%;
-    transform: translateX(-50%) translateY(80px);
+    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(80px);
     background: var(--teal); color: var(--deep); font-weight: 800;
     padding: 12px 28px; border-radius: 100px; font-size: 1rem;
     transition: transform 0.3s ease; z-index: 999; pointer-events: none;
   }
   .toast.show { transform: translateX(-50%) translateY(0); }
-
   footer { text-align: center; color: var(--muted); font-size: 0.78rem; padding: 1rem; }
 </style>
 </head>
 <body>
+
+<!-- ═══════════════════════════════════════════════════════
+     SETUP BANNER  –  remove or hide once configured
+     ═══════════════════════════════════════════════════════ -->
+<div id="setup-banner" style="display:none">
+  <h3>⚙️ One-time Supabase Setup</h3>
+  <ol>
+    <li>Go to <strong>supabase.com</strong>, create a free account and a new project.</li>
+    <li>In your project, open <strong>SQL Editor</strong> and run this query:</li>
+  </ol>
+  <div class="sql-block">create table votes (
+  id        bigint generated always as identity primary key,
+  name      text not null,
+  picks     jsonb not null,
+  created_at timestamptz default now()
+);</div>
+  <ol start="3">
+    <li>Go to <strong>Project Settings → API</strong>. Copy your <em>Project URL</em> and <em>anon public</em> key.</li>
+    <li>Paste them below and click Save — they'll be stored in the browser.</li>
+  </ol>
+  <div class="config-row">
+    <input id="cfg-url" placeholder="Project URL  (https://xxxx.supabase.co)" />
+    <input id="cfg-key" placeholder="anon public key" />
+    <button class="config-save-btn" onclick="saveConfig()">Save</button>
+  </div>
+  <div id="setup-status"></div>
+  <button class="hide-banner-btn" onclick="hideBanner()">Hide this banner</button>
+</div>
 
 <header>
   <div class="stars">★ ★ ★ ★ ★</div>
@@ -278,6 +267,99 @@
 <footer>Eurovision Song Contest 2026 · Vienna, Austria</footer>
 
 <script>
+// ═══════════════════════════════════════════
+//  CONFIG  –  loaded from localStorage
+// ═══════════════════════════════════════════
+const CFG_KEY  = 'esc2026_supabase_cfg';
+const USER_KEY = 'esc2026_v3_voted';
+
+function getConfig() {
+  try { return JSON.parse(localStorage.getItem(CFG_KEY) || '{}'); } catch { return {}; }
+}
+const HARDCODED_URL = 'https://pblbqoxlzkonuqckiosi.supabase.co';
+const HARDCODED_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBibGJxb3hsemtvbnVxY2tpb3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5NDYxOTIsImV4cCI6MjA5NDUyMjE5Mn0.kP1jPqDxETXbEyxZypj93MNpX_1FE-wQrjGtDRYha0Q';
+function supabaseUrl()  { return HARDCODED_URL; }
+function supabaseKey()  { return HARDCODED_KEY; }
+function isConfigured() { return true; }
+
+function saveConfig() {
+  const url = document.getElementById('cfg-url').value.trim();
+  const key = document.getElementById('cfg-key').value.trim();
+  if (!url || !key) { setStatus('Please fill in both fields.', 'err'); return; }
+  localStorage.setItem(CFG_KEY, JSON.stringify({ url, key }));
+  setStatus('Saved! Testing connection…', 'ok');
+  testConnection().then(ok => {
+    if (ok) { setStatus('✅ Connected! You can hide this banner now.', 'ok'); loadAndRender(); }
+    else    setStatus('❌ Could not connect. Double-check the URL and key.', 'err');
+  });
+}
+
+async function testConnection() {
+  try {
+    const r = await sbFetch('GET', '/rest/v1/votes?limit=1');
+    return r.ok;
+  } catch { return false; }
+}
+
+function setStatus(msg, cls) {
+  const el = document.getElementById('setup-status');
+  el.textContent = msg; el.className = cls;
+}
+
+function hideBanner() {
+  document.getElementById('setup-banner').style.display = 'none';
+}
+
+// Pre-fill saved config
+window.addEventListener('DOMContentLoaded', () => {
+  const cfg = getConfig();
+  if (cfg.url) document.getElementById('cfg-url').value = cfg.url;
+  if (cfg.key) document.getElementById('cfg-key').value = cfg.key;
+  if (cfg.url && cfg.key) hideBanner();
+});
+
+// ═══════════════════════════════════════════
+//  SUPABASE REST HELPERS
+// ═══════════════════════════════════════════
+async function sbFetch(method, path, body) {
+  const opts = {
+    method,
+    headers: {
+      'apikey': supabaseKey(),
+      'Authorization': 'Bearer ' + supabaseKey(),
+      'Content-Type': 'application/json',
+      'Prefer': method === 'POST' ? 'return=minimal' : '',
+    },
+  };
+  if (body) opts.body = JSON.stringify(body);
+  return fetch(supabaseUrl() + path, opts);
+}
+
+async function loadVotes() {
+  if (!isConfigured()) return { scores: {}, voters: [] };
+  try {
+    const r = await sbFetch('GET', '/rest/v1/votes?select=name,picks&order=created_at.asc');
+    if (!r.ok) return { scores: {}, voters: [] };
+    const rows = await r.json();
+    const scores = {};
+    const voters = rows.map(row => {
+      const picks = row.picks; // { Country: pts, ... }
+      Object.entries(picks).forEach(([c, p]) => { scores[c] = (scores[c] || 0) + p; });
+      return { name: row.name, picks };
+    });
+    return { scores, voters };
+  } catch { return { scores: {}, voters: [] }; }
+}
+
+async function saveVote(name, picks) {
+  if (!isConfigured()) throw new Error('Not configured');
+  const r = await sbFetch('POST', '/rest/v1/votes', { name, picks });
+  if (!r.ok) { const t = await r.text(); throw new Error(t); }
+}
+
+// ═══════════════════════════════════════════
+//  ENTRIES
+// ═══════════════════════════════════════════
 const ENTRIES = [
   { num:1,  flag:'🇩🇰', country:'Denmark',        song:'Før vi går hjem',    artist:'Søren Torpegaard Lund' },
   { num:2,  flag:'🇩🇪', country:'Germany',        song:'Fire',               artist:'Sarah Engels' },
@@ -306,12 +388,9 @@ const ENTRIES = [
   { num:25, flag:'🇦🇹', country:'Austria',        song:'Tanzschein',         artist:'Cosmó' },
 ];
 
-const STORAGE_KEY = 'esc2026_v2_votes';
-const USER_KEY    = 'esc2026_v2_voted';
-const ALL_PTS     = [12, 10, 8];
-
-let selections  = {}; // { country: 12|10|8 }
-let openPicker  = null; // country whose picker is currently open
+const ALL_PTS = [12, 10, 8];
+let selections = {};
+let openPicker = null;
 
 // ── Build cards ───────────────────────────────────────────────────────────────
 const grid = document.getElementById('entries-grid');
@@ -328,14 +407,13 @@ ENTRIES.forEach(e => {
       <div class="card-artist">${e.artist}</div>
     </div>
     <span class="card-pts-badge"></span>`;
-  div.onclick = (ev) => { ev.stopPropagation(); togglePicker(e.country); };
+  div.onclick = ev => { ev.stopPropagation(); togglePicker(e.country); };
   grid.appendChild(div);
 });
 
-// Close picker when clicking outside
 document.addEventListener('click', () => closePicker());
 
-// ── Picker open/close ─────────────────────────────────────────────────────────
+// ── Picker ────────────────────────────────────────────────────────────────────
 function togglePicker(country) {
   if (hasVoted()) return;
   if (openPicker === country) { closePicker(); return; }
@@ -347,46 +425,37 @@ function togglePicker(country) {
 function closePicker() {
   if (!openPicker) return;
   const card = document.getElementById('card-' + openPicker);
-  const existing = card && card.querySelector('.pts-picker');
-  if (existing) existing.remove();
+  const el = card && card.querySelector('.pts-picker');
+  if (el) el.remove();
   openPicker = null;
 }
 
 function renderPicker(country) {
   const card = document.getElementById('card-' + country);
-  const currentPts = selections[country]; // may be undefined
-
-  // Only count points used by OTHER countries as taken
+  const currentPts = selections[country];
   const takenByOthers = new Set(
-    Object.entries(selections)
-      .filter(([c]) => c !== country)
-      .map(([, p]) => p)
+    Object.entries(selections).filter(([c]) => c !== country).map(([,p]) => p)
   );
-
-  // Show all values not taken by other countries
-  const availablePts = ALL_PTS.filter(p => !takenByOthers.has(p));
+  const available = ALL_PTS.filter(p => !takenByOthers.has(p));
 
   const picker = document.createElement('div');
   picker.className = 'pts-picker';
   picker.onclick = e => e.stopPropagation();
 
-  availablePts.forEach(p => {
+  available.forEach(p => {
     const btn = document.createElement('button');
     const isCurrent = currentPts === p;
     btn.className = `pts-picker-btn btn-${p}${isCurrent ? ' active' : ''}`;
     btn.textContent = p;
-    // Tapping the already-active value removes it; otherwise assigns it
-    btn.onclick = (e) => { e.stopPropagation(); assignPoints(country, isCurrent ? null : p); };
+    btn.onclick = e => { e.stopPropagation(); assignPoints(country, isCurrent ? null : p); };
     picker.appendChild(btn);
   });
 
-  // Show remove button only when a value is already assigned
   if (currentPts !== undefined) {
     const rm = document.createElement('button');
     rm.className = 'pts-picker-btn btn-rm';
     rm.textContent = '✕';
-    rm.title = 'Remove';
-    rm.onclick = (e) => { e.stopPropagation(); assignPoints(country, null); };
+    rm.onclick = e => { e.stopPropagation(); assignPoints(country, null); };
     picker.appendChild(rm);
   }
 
@@ -402,7 +471,6 @@ function assignPoints(country, pts) {
   refreshButton();
 }
 
-// ── Refresh card visuals ──────────────────────────────────────────────────────
 function refreshCards() {
   ENTRIES.forEach(e => {
     const card  = document.getElementById('card-' + e.country);
@@ -412,12 +480,10 @@ function refreshCards() {
     if (pts) { card.classList.add('sel-' + pts); badge.textContent = pts + ' PTS'; }
     else      { badge.textContent = ''; }
   });
-
-  const used = Object.keys(selections).length;
-  const left = 3 - used;
-  const status = document.getElementById('pts-status');
-  if (left === 0) status.textContent = 'All 3 picks made! Enter your name and submit.';
-  else            status.textContent = `${left} more pick${left > 1 ? 's' : ''} to go.`;
+  const left = 3 - Object.keys(selections).length;
+  document.getElementById('pts-status').textContent =
+    left === 0 ? 'All 3 picks made! Enter your name and submit.'
+               : `${left} more pick${left > 1 ? 's' : ''} to go.`;
 }
 
 function refreshButton() {
@@ -425,49 +491,39 @@ function refreshButton() {
                 document.getElementById('voter-name').value.trim().length > 0;
   document.getElementById('vote-btn').disabled = !ready;
 }
-
 document.getElementById('voter-name').addEventListener('input', refreshButton);
 
-// ── Storage ───────────────────────────────────────────────────────────────────
-async function getVotes() {
-  try {
-    const r = await window.storage.get(STORAGE_KEY, true);
-    return r ? JSON.parse(r.value) : { scores: {}, voters: [] };
-  } catch { return { scores: {}, voters: [] }; }
-}
-async function saveVotes(data) {
-  await window.storage.set(STORAGE_KEY, JSON.stringify(data), true);
-}
+// ── Voted state ───────────────────────────────────────────────────────────────
 function hasVoted()  { return localStorage.getItem(USER_KEY) === '1'; }
 function markVoted() { localStorage.setItem(USER_KEY, '1'); }
 
 // ── Submit ────────────────────────────────────────────────────────────────────
 async function submitVote() {
   const name = document.getElementById('voter-name').value.trim();
-  if (!name) { showError('Please enter your name!'); return; }
-  if (Object.keys(selections).length < 3) { showError('You need to pick 3 countries!'); return; }
-  if (hasVoted()) return;
+  if (!name)                               { showError('Please enter your name!'); return; }
+  if (Object.keys(selections).length < 3) { showError('Pick 3 countries first!'); return; }
+  if (!isConfigured())                     { showError('Supabase not configured yet — see the setup banner.'); return; }
+  if (hasVoted())                          return;
 
   const btn = document.getElementById('vote-btn');
   btn.disabled = true;
   btn.textContent = 'Sending… 🚀';
 
-  // Persist picks so they survive a reload
+  try {
+    await saveVote(name, { ...selections });
+  } catch(err) {
+    showError('Save failed: ' + err.message);
+    btn.disabled = false;
+    btn.textContent = 'Submit Votes ✨';
+    return;
+  }
+
   localStorage.setItem(USER_KEY + '_picks', JSON.stringify(selections));
-
-  const data = await getVotes();
-  Object.entries(selections).forEach(([c, p]) => {
-    data.scores[c] = (data.scores[c] || 0) + p;
-  });
-  data.voters = data.voters || [];
-  data.voters.push({ name, picks: { ...selections } });
-  await saveVotes(data);
   markVoted();
-
   lockUI();
   const top = Object.entries(selections).sort((a,b) => b[1]-a[1])[0];
   showToast(`🎉 Voted! ${top[1]} pts to ${top[0]}`);
-  renderResults(data);
+  await loadAndRender();
 }
 
 function lockUI() {
@@ -479,10 +535,14 @@ function lockUI() {
   document.getElementById('voter-name').disabled = true;
 }
 
-// ── Render results ────────────────────────────────────────────────────────────
+// ── Results ───────────────────────────────────────────────────────────────────
+async function loadAndRender() {
+  const data = await loadVotes();
+  renderResults(data);
+}
+
 function renderResults(data) {
   document.getElementById('results-section').style.display = 'block';
-
   const scores = data.scores || {};
   const voters = data.voters || [];
   const maxPts = Math.max(...Object.values(scores), 1);
@@ -503,16 +563,16 @@ function renderResults(data) {
     : sorted.map((e, i) => `
         <div class="result-row">
           <span class="result-flag">${e.flag}</span>
-          <span class="result-name">${medals[i] ? medals[i] + ' ' : ''}${e.country}</span>
+          <span class="result-name">${(medals[i] || '') + ' '}${e.country}</span>
           <div class="result-bar-wrap">
-            <div class="result-bar" style="width:${Math.round(e.pts / maxPts * 100)}%"></div>
+            <div class="result-bar" style="width:${Math.round(e.pts/maxPts*100)}%"></div>
           </div>
           <span class="result-pts">${e.pts} pts</span>
         </div>`).join('');
 
   if (voters.length > 0) {
     const rows = voters.map(v => {
-      const picks = Object.entries(v.picks).sort((a, b) => b[1] - a[1]);
+      const picks = Object.entries(v.picks).sort((a,b) => b[1]-a[1]);
       const badges = picks.map(([c, p]) => {
         const entry = ENTRIES.find(e => e.country === c);
         return `<span class="voter-pick">${entry ? entry.flag : ''} ${c}</span><span class="voter-pts p${p}">${p}</span>`;
@@ -526,11 +586,7 @@ function renderResults(data) {
   }
 }
 
-function esc(s) {
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-// ── Helpers ───────────────────────────────────────────────────────────────────
+function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function showError(msg) { document.getElementById('error-msg').textContent = msg; }
 function clearError()   { document.getElementById('error-msg').textContent = ''; }
 function showToast(msg) {
@@ -541,17 +597,15 @@ function showToast(msg) {
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 async function init() {
-  const data = await getVotes();
-
   if (hasVoted()) {
     try { selections = JSON.parse(localStorage.getItem(USER_KEY + '_picks') || '{}'); } catch {}
     refreshCards();
     lockUI();
   }
-
-  if (Object.keys(data.scores || {}).length > 0 || hasVoted()) renderResults(data);
-
-  setInterval(async () => renderResults(await getVotes()), 15000);
+  if (isConfigured()) {
+    await loadAndRender();
+    setInterval(loadAndRender, 15000);
+  }
 }
 
 init();
