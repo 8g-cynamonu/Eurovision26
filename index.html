@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eurovision 2026 – Who Will Win? 🌟</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #FFD700;
+    --teal: #00C9B1;
+    --pink: #FF4D8B;
+    --deep: #0D0D2B;
+    --card: #14143A;
+    --border: #2A2A5A;
+    --text: #E8E8FF;
+    --muted: #8888BB;
+    --p12: #FFD700;
+    --p10: #C0C0C0;
+    --p8:  #CD7F32;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--deep);
+    color: var(--text);
+    font-family: 'Nunito', sans-serif;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse 80% 40% at 50% 0%, rgba(0,201,177,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 30% at 80% 100%, rgba(255,77,139,0.1) 0%, transparent 70%);
+  }
+
+  header { text-align: center; padding: 2.5rem 1rem 1.2rem; }
+
+  .stars {
+    font-size: 1.4rem; letter-spacing: 6px; color: var(--gold);
+    animation: twinkle 2s infinite alternate;
+  }
+  @keyframes twinkle { from { opacity: 0.6; } to { opacity: 1; } }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.8rem, 8vw, 5rem);
+    letter-spacing: 4px;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--teal) 50%, var(--pink) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    line-height: 1; margin: 0.3rem 0;
+  }
+
+  .subtitle {
+    color: var(--muted); font-size: 0.95rem; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase; margin-top: 0.4rem;
+  }
+
+  .container { max-width: 700px; margin: 0 auto; padding: 0 1rem 3rem; }
+
+  /* Name */
+  .name-section {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.2rem 1.5rem; margin-bottom: 1.2rem;
+  }
+  .name-section label {
+    display: block; font-weight: 800; font-size: 0.85rem;
+    letter-spacing: 1px; text-transform: uppercase; color: var(--teal); margin-bottom: 0.5rem;
+  }
+  .name-section input {
+    width: 100%; background: rgba(255,255,255,0.05);
+    border: 2px solid var(--border); border-radius: 10px;
+    padding: 10px 14px; color: var(--text);
+    font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 700; outline: none;
+    transition: border-color 0.2s;
+  }
+  .name-section input:focus { border-color: var(--teal); }
+  .name-section input::placeholder { color: var(--muted); font-weight: 400; }
+  .name-section input:disabled { opacity: 0.5; }
+
+  /* Legend */
+  .points-legend {
+    display: flex; gap: 10px; justify-content: center;
+    margin-bottom: 0.9rem; flex-wrap: wrap;
+  }
+  .pts-badge {
+    display: flex; align-items: center; gap: 6px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 100px; padding: 6px 14px; font-size: 0.82rem; font-weight: 700;
+  }
+  .pts-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .pts-dot.p12 { background: var(--p12); }
+  .pts-dot.p10 { background: var(--p10); }
+  .pts-dot.p8  { background: var(--p8); }
+
+  .pts-left {
+    text-align: center; font-size: 0.82rem; color: var(--muted);
+    margin-bottom: 1rem; font-weight: 600; line-height: 1.4;
+  }
+  .pts-left strong { color: var(--gold); }
+
+  /* Results */
+  #results-section {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.2rem 1.5rem; margin-bottom: 1.4rem; display: none;
+  }
+  #results-section h2 {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem;
+    letter-spacing: 2px; color: var(--gold); margin-bottom: 0.2rem;
+  }
+  .results-meta { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.9rem; font-weight: 600; }
+
+  .result-row {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 0.88rem;
+  }
+  .result-flag { font-size: 1.15rem; width: 24px; text-align: center; }
+  .result-name { width: 118px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.83rem; }
+  .result-bar-wrap { flex: 1; background: rgba(255,255,255,0.06); border-radius: 100px; height: 13px; overflow: hidden; }
+  .result-bar { height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--teal), var(--pink)); transition: width 0.6s ease; }
+  .result-pts { font-size: 0.82rem; color: var(--gold); width: 44px; text-align: right; font-weight: 800; }
+
+  .voter-list { margin-top: 1rem; border-top: 1px solid var(--border); padding-top: 0.9rem; }
+  .voter-list-title {
+    font-size: 0.75rem; color: var(--muted); font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px; margin-bottom: 7px;
+  }
+  .voter-entry {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 0.8rem; margin-bottom: 5px; flex-wrap: wrap;
+  }
+  .voter-name { font-weight: 800; color: var(--teal); min-width: 70px; }
+  .voter-pick {
+    display: inline-flex; align-items: center; gap: 3px;
+    background: rgba(255,255,255,0.05); border-radius: 100px; padding: 2px 8px; font-size: 0.76rem;
+  }
+  .voter-pts {
+    font-family: 'Bebas Neue', sans-serif; font-size: 0.88rem;
+    border-radius: 100px; padding: 1px 7px;
+  }
+  .voter-pts.p12 { background: rgba(255,215,0,0.15); color: var(--p12); }
+  .voter-pts.p10 { background: rgba(192,192,192,0.15); color: var(--p10); }
+  .voter-pts.p8  { background: rgba(205,127,50,0.15);  color: var(--p8); }
+
+  /* Cards */
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+  @media (max-width: 500px) { .grid { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--card); border: 2px solid var(--border);
+    border-radius: 14px; padding: 10px 12px; cursor: pointer;
+    transition: all 0.18s ease; display: flex; align-items: center;
+    gap: 10px; position: relative; overflow: hidden; user-select: none;
+  }
+  .card:hover:not(.locked) { border-color: var(--teal); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,201,177,0.15); }
+  .card.locked { cursor: default; }
+
+  /* Points picker popup */
+  .pts-picker {
+    position: absolute;
+    top: 50%; right: 10px;
+    transform: translateY(-50%);
+    display: flex; gap: 5px; align-items: center;
+    background: rgba(13,13,43,0.97);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 4px 6px;
+    z-index: 10;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    animation: popIn 0.15s ease;
+  }
+  @keyframes popIn { from { opacity:0; transform: translateY(-50%) scale(0.85); } to { opacity:1; transform: translateY(-50%) scale(1); } }
+  .pts-picker-btn {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.88rem;
+    border: none; border-radius: 100px;
+    padding: 3px 9px; cursor: pointer;
+    transition: transform 0.1s, opacity 0.1s;
+    font-weight: 700; line-height: 1.5;
+  }
+  .pts-picker-btn:hover { transform: scale(1.12); }
+  .pts-picker-btn.btn-12 { background: rgba(255,215,0,0.2); color: var(--p12); }
+  .pts-picker-btn.btn-10 { background: rgba(192,192,192,0.2); color: var(--p10); }
+  .pts-picker-btn.btn-8  { background: rgba(205,127,50,0.2);  color: var(--p8); }
+  .pts-picker-btn.btn-rm { background: rgba(255,77,139,0.15); color: var(--pink); font-size: 0.8rem; padding: 3px 7px; }
+  .pts-picker-btn.active { outline: 2px solid currentColor; }
+
+  .card-pts-badge {
+    display: none; position: absolute; top: 7px; right: 9px;
+    font-family: 'Bebas Neue', sans-serif; font-size: 0.95rem;
+    border-radius: 100px; padding: 0 8px; line-height: 1.7;
+  }
+  .card.sel-12 { border-color: var(--p12); background: rgba(255,215,0,0.07); box-shadow: 0 0 0 1px var(--p12), 0 4px 20px rgba(255,215,0,0.12); }
+  .card.sel-12 .card-pts-badge { display: block; background: rgba(255,215,0,0.18); color: var(--p12); }
+  .card.sel-10 { border-color: var(--p10); background: rgba(192,192,192,0.06); box-shadow: 0 0 0 1px var(--p10), 0 4px 16px rgba(192,192,192,0.08); }
+  .card.sel-10 .card-pts-badge { display: block; background: rgba(192,192,192,0.18); color: var(--p10); }
+  .card.sel-8  { border-color: var(--p8);  background: rgba(205,127,50,0.06);  box-shadow: 0 0 0 1px var(--p8),  0 4px 16px rgba(205,127,50,0.1); }
+  .card.sel-8  .card-pts-badge { display: block; background: rgba(205,127,50,0.18);  color: var(--p8); }
+
+  .card-num { font-size: 0.68rem; color: var(--muted); font-weight: 700; min-width: 16px; }
+  .card-flag { font-size: 1.65rem; line-height: 1; }
+  .card-info { flex: 1; min-width: 0; }
+  .card-country { font-weight: 800; font-size: 0.9rem; }
+  .card-song { color: var(--muted); font-size: 0.73rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .card-artist { color: var(--teal); font-size: 0.73rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  /* Button */
+  .vote-btn {
+    display: block; width: 100%; max-width: 340px; margin: 1.4rem auto 0;
+    padding: 15px; font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem;
+    letter-spacing: 3px; color: var(--deep);
+    background: linear-gradient(135deg, var(--gold), var(--teal));
+    border: none; border-radius: 100px; cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, opacity 0.2s;
+    box-shadow: 0 4px 20px rgba(0,201,177,0.3);
+  }
+  .vote-btn:hover:not(:disabled) { transform: scale(1.03); box-shadow: 0 6px 28px rgba(0,201,177,0.45); }
+  .vote-btn:disabled { opacity: 0.32; cursor: not-allowed; }
+
+  .already-voted-msg {
+    text-align: center; color: var(--gold); font-weight: 700;
+    margin-top: 1rem; display: none; font-size: 0.95rem;
+  }
+
+  .error-msg { color: var(--pink); font-size: 0.82rem; font-weight: 700; text-align: center; margin-top: 0.7rem; min-height: 1.1em; }
+
+  .toast {
+    position: fixed; bottom: 30px; left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--teal); color: var(--deep); font-weight: 800;
+    padding: 12px 28px; border-radius: 100px; font-size: 1rem;
+    transition: transform 0.3s ease; z-index: 999; pointer-events: none;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  footer { text-align: center; color: var(--muted); font-size: 0.78rem; padding: 1rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="stars">★ ★ ★ ★ ★</div>
+  <h1>EUROVISION 2026</h1>
+  <div class="subtitle">Vienna · Grand Final · 16 May</div>
+</header>
+
+<div class="container">
+
+  <div class="name-section">
+    <label for="voter-name">👤 Your name</label>
+    <input type="text" id="voter-name" placeholder="e.g. Steffen" maxlength="30" autocomplete="off">
+  </div>
+
+  <div id="results-section">
+    <h2>📊 Live Scoreboard</h2>
+    <div class="results-meta" id="results-meta"></div>
+    <div id="results-list"></div>
+    <div class="voter-list" id="voter-list"></div>
+  </div>
+
+  <div class="points-legend">
+    <div class="pts-badge"><span class="pts-dot p12"></span>12 pts – favourite</div>
+    <div class="pts-badge"><span class="pts-dot p10"></span>10 pts – runner-up</div>
+    <div class="pts-badge"><span class="pts-dot p8"></span>8 pts – third pick</div>
+  </div>
+
+  <div class="pts-left" id="pts-left">
+    Tap a country to choose its points. Only unassigned values will appear.<br>
+    <strong id="pts-status">Pick 3 countries to submit.</strong>
+  </div>
+
+  <div class="grid" id="entries-grid"></div>
+
+  <div class="error-msg" id="error-msg"></div>
+  <button class="vote-btn" id="vote-btn" onclick="submitVote()" disabled>Submit Votes ✨</button>
+  <div class="already-voted-msg" id="already-voted">✅ Your votes are in!</div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+<footer>Eurovision Song Contest 2026 · Vienna, Austria</footer>
+
+<script>
+const ENTRIES = [
+  { num:1,  flag:'🇩🇰', country:'Denmark',        song:'Før vi går hjem',    artist:'Søren Torpegaard Lund' },
+  { num:2,  flag:'🇩🇪', country:'Germany',        song:'Fire',               artist:'Sarah Engels' },
+  { num:3,  flag:'🇮🇱', country:'Israel',         song:'Michelle',           artist:'Noam Bettan' },
+  { num:4,  flag:'🇧🇪', country:'Belgium',        song:'Dancing on the Ice', artist:'Essyla' },
+  { num:5,  flag:'🇦🇱', country:'Albania',        song:'Nân',                artist:'Alis' },
+  { num:6,  flag:'🇬🇷', country:'Greece',         song:'Ferto',              artist:'Akylas' },
+  { num:7,  flag:'🇺🇦', country:'Ukraine',        song:'Ridnym',             artist:'Leléka' },
+  { num:8,  flag:'🇦🇺', country:'Australia',      song:'Eclipse',            artist:'Delta Goodrem' },
+  { num:9,  flag:'🇷🇸', country:'Serbia',         song:'Kraj mene',          artist:'Lavina' },
+  { num:10, flag:'🇲🇹', country:'Malta',          song:'Bella',              artist:'Aidan' },
+  { num:11, flag:'🇨🇿', country:'Czechia',        song:'Crossroads',         artist:'Daniel Žižka' },
+  { num:12, flag:'🇧🇬', country:'Bulgaria',       song:'Bangaranga',         artist:'Dara' },
+  { num:13, flag:'🇭🇷', country:'Croatia',        song:'Andromeda',          artist:'Lelek' },
+  { num:14, flag:'🇬🇧', country:'United Kingdom', song:'Eins, Zwei, Drei',   artist:'Look Mum No Computer' },
+  { num:15, flag:'🇫🇷', country:'France',         song:'Regarde !',          artist:'Monroe' },
+  { num:16, flag:'🇲🇩', country:'Moldova',        song:'Viva, Moldova',      artist:'Satoshi' },
+  { num:17, flag:'🇫🇮', country:'Finland',        song:'Liekinheitin',       artist:'Linda Lampenius & Pete Parkkonen' },
+  { num:18, flag:'🇵🇱', country:'Poland',         song:'Pray',               artist:'Alicja' },
+  { num:19, flag:'🇱🇹', country:'Lithuania',      song:'Sólo quiero más',    artist:'Lion Ceccah' },
+  { num:20, flag:'🇸🇪', country:'Sweden',         song:'My System',          artist:'Felicia' },
+  { num:21, flag:'🇨🇾', country:'Cyprus',         song:'Jalla',              artist:'Antigoni' },
+  { num:22, flag:'🇮🇹', country:'Italy',          song:'Per sempre sì',      artist:'Sal Da Vinci' },
+  { num:23, flag:'🇳🇴', country:'Norway',         song:'Ya ya ya',           artist:'Jonas Lovv' },
+  { num:24, flag:'🇷🇴', country:'Romania',        song:'Choke Me',           artist:'Alexandra Căpitănescu' },
+  { num:25, flag:'🇦🇹', country:'Austria',        song:'Tanzschein',         artist:'Cosmó' },
+];
+
+const STORAGE_KEY = 'esc2026_v2_votes';
+const USER_KEY    = 'esc2026_v2_voted';
+const ALL_PTS     = [12, 10, 8];
+
+let selections  = {}; // { country: 12|10|8 }
+let openPicker  = null; // country whose picker is currently open
+
+// ── Build cards ───────────────────────────────────────────────────────────────
+const grid = document.getElementById('entries-grid');
+ENTRIES.forEach(e => {
+  const div = document.createElement('div');
+  div.className = 'card';
+  div.id = 'card-' + e.country;
+  div.innerHTML = `
+    <span class="card-num">${e.num}</span>
+    <span class="card-flag">${e.flag}</span>
+    <div class="card-info">
+      <div class="card-country">${e.country}</div>
+      <div class="card-song">"${e.song}"</div>
+      <div class="card-artist">${e.artist}</div>
+    </div>
+    <span class="card-pts-badge"></span>`;
+  div.onclick = (ev) => { ev.stopPropagation(); togglePicker(e.country); };
+  grid.appendChild(div);
+});
+
+// Close picker when clicking outside
+document.addEventListener('click', () => closePicker());
+
+// ── Picker open/close ─────────────────────────────────────────────────────────
+function togglePicker(country) {
+  if (hasVoted()) return;
+  if (openPicker === country) { closePicker(); return; }
+  closePicker();
+  openPicker = country;
+  renderPicker(country);
+}
+
+function closePicker() {
+  if (!openPicker) return;
+  const card = document.getElementById('card-' + openPicker);
+  const existing = card && card.querySelector('.pts-picker');
+  if (existing) existing.remove();
+  openPicker = null;
+}
+
+function renderPicker(country) {
+  const card = document.getElementById('card-' + country);
+  const currentPts = selections[country]; // may be undefined
+
+  // Only count points used by OTHER countries as taken
+  const takenByOthers = new Set(
+    Object.entries(selections)
+      .filter(([c]) => c !== country)
+      .map(([, p]) => p)
+  );
+
+  // Show all values not taken by other countries
+  const availablePts = ALL_PTS.filter(p => !takenByOthers.has(p));
+
+  const picker = document.createElement('div');
+  picker.className = 'pts-picker';
+  picker.onclick = e => e.stopPropagation();
+
+  availablePts.forEach(p => {
+    const btn = document.createElement('button');
+    const isCurrent = currentPts === p;
+    btn.className = `pts-picker-btn btn-${p}${isCurrent ? ' active' : ''}`;
+    btn.textContent = p;
+    // Tapping the already-active value removes it; otherwise assigns it
+    btn.onclick = (e) => { e.stopPropagation(); assignPoints(country, isCurrent ? null : p); };
+    picker.appendChild(btn);
+  });
+
+  // Show remove button only when a value is already assigned
+  if (currentPts !== undefined) {
+    const rm = document.createElement('button');
+    rm.className = 'pts-picker-btn btn-rm';
+    rm.textContent = '✕';
+    rm.title = 'Remove';
+    rm.onclick = (e) => { e.stopPropagation(); assignPoints(country, null); };
+    picker.appendChild(rm);
+  }
+
+  card.appendChild(picker);
+}
+
+function assignPoints(country, pts) {
+  clearError();
+  if (pts === null) delete selections[country];
+  else selections[country] = pts;
+  closePicker();
+  refreshCards();
+  refreshButton();
+}
+
+// ── Refresh card visuals ──────────────────────────────────────────────────────
+function refreshCards() {
+  ENTRIES.forEach(e => {
+    const card  = document.getElementById('card-' + e.country);
+    const badge = card.querySelector('.card-pts-badge');
+    card.classList.remove('sel-12', 'sel-10', 'sel-8');
+    const pts = selections[e.country];
+    if (pts) { card.classList.add('sel-' + pts); badge.textContent = pts + ' PTS'; }
+    else      { badge.textContent = ''; }
+  });
+
+  const used = Object.keys(selections).length;
+  const left = 3 - used;
+  const status = document.getElementById('pts-status');
+  if (left === 0) status.textContent = 'All 3 picks made! Enter your name and submit.';
+  else            status.textContent = `${left} more pick${left > 1 ? 's' : ''} to go.`;
+}
+
+function refreshButton() {
+  const ready = Object.keys(selections).length === 3 &&
+                document.getElementById('voter-name').value.trim().length > 0;
+  document.getElementById('vote-btn').disabled = !ready;
+}
+
+document.getElementById('voter-name').addEventListener('input', refreshButton);
+
+// ── Storage ───────────────────────────────────────────────────────────────────
+async function getVotes() {
+  try {
+    const r = await window.storage.get(STORAGE_KEY, true);
+    return r ? JSON.parse(r.value) : { scores: {}, voters: [] };
+  } catch { return { scores: {}, voters: [] }; }
+}
+async function saveVotes(data) {
+  await window.storage.set(STORAGE_KEY, JSON.stringify(data), true);
+}
+function hasVoted()  { return localStorage.getItem(USER_KEY) === '1'; }
+function markVoted() { localStorage.setItem(USER_KEY, '1'); }
+
+// ── Submit ────────────────────────────────────────────────────────────────────
+async function submitVote() {
+  const name = document.getElementById('voter-name').value.trim();
+  if (!name) { showError('Please enter your name!'); return; }
+  if (Object.keys(selections).length < 3) { showError('You need to pick 3 countries!'); return; }
+  if (hasVoted()) return;
+
+  const btn = document.getElementById('vote-btn');
+  btn.disabled = true;
+  btn.textContent = 'Sending… 🚀';
+
+  // Persist picks so they survive a reload
+  localStorage.setItem(USER_KEY + '_picks', JSON.stringify(selections));
+
+  const data = await getVotes();
+  Object.entries(selections).forEach(([c, p]) => {
+    data.scores[c] = (data.scores[c] || 0) + p;
+  });
+  data.voters = data.voters || [];
+  data.voters.push({ name, picks: { ...selections } });
+  await saveVotes(data);
+  markVoted();
+
+  lockUI();
+  const top = Object.entries(selections).sort((a,b) => b[1]-a[1])[0];
+  showToast(`🎉 Voted! ${top[1]} pts to ${top[0]}`);
+  renderResults(data);
+}
+
+function lockUI() {
+  closePicker();
+  document.querySelectorAll('.card').forEach(c => c.classList.add('locked'));
+  document.getElementById('vote-btn').style.display = 'none';
+  document.getElementById('pts-left').style.display = 'none';
+  document.getElementById('already-voted').style.display = 'block';
+  document.getElementById('voter-name').disabled = true;
+}
+
+// ── Render results ────────────────────────────────────────────────────────────
+function renderResults(data) {
+  document.getElementById('results-section').style.display = 'block';
+
+  const scores = data.scores || {};
+  const voters = data.voters || [];
+  const maxPts = Math.max(...Object.values(scores), 1);
+
+  const sorted = ENTRIES
+    .map(e => ({ ...e, pts: scores[e.country] || 0 }))
+    .filter(e => e.pts > 0)
+    .sort((a, b) => b.pts - a.pts);
+
+  document.getElementById('results-meta').textContent =
+    voters.length === 0 ? 'No votes yet' :
+    voters.length === 1 ? '1 person has voted' :
+    `${voters.length} people have voted`;
+
+  const medals = ['🥇', '🥈', '🥉'];
+  document.getElementById('results-list').innerHTML = sorted.length === 0
+    ? '<div style="color:var(--muted);font-size:.9rem;margin-bottom:.5rem">No votes yet – be the first!</div>'
+    : sorted.map((e, i) => `
+        <div class="result-row">
+          <span class="result-flag">${e.flag}</span>
+          <span class="result-name">${medals[i] ? medals[i] + ' ' : ''}${e.country}</span>
+          <div class="result-bar-wrap">
+            <div class="result-bar" style="width:${Math.round(e.pts / maxPts * 100)}%"></div>
+          </div>
+          <span class="result-pts">${e.pts} pts</span>
+        </div>`).join('');
+
+  if (voters.length > 0) {
+    const rows = voters.map(v => {
+      const picks = Object.entries(v.picks).sort((a, b) => b[1] - a[1]);
+      const badges = picks.map(([c, p]) => {
+        const entry = ENTRIES.find(e => e.country === c);
+        return `<span class="voter-pick">${entry ? entry.flag : ''} ${c}</span><span class="voter-pts p${p}">${p}</span>`;
+      }).join(' ');
+      return `<div class="voter-entry"><span class="voter-name">${esc(v.name)}</span>${badges}</div>`;
+    }).join('');
+    document.getElementById('voter-list').innerHTML =
+      `<div class="voter-list-title">Who voted for what</div>${rows}`;
+  } else {
+    document.getElementById('voter-list').innerHTML = '';
+  }
+}
+
+function esc(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function showError(msg) { document.getElementById('error-msg').textContent = msg; }
+function clearError()   { document.getElementById('error-msg').textContent = ''; }
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3200);
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+async function init() {
+  const data = await getVotes();
+
+  if (hasVoted()) {
+    try { selections = JSON.parse(localStorage.getItem(USER_KEY + '_picks') || '{}'); } catch {}
+    refreshCards();
+    lockUI();
+  }
+
+  if (Object.keys(data.scores || {}).length > 0 || hasVoted()) renderResults(data);
+
+  setInterval(async () => renderResults(await getVotes()), 15000);
+}
+
+init();
+</script>
+</body>
+</html>
